@@ -16,6 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.decorators.csrf import csrf_exempt
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
@@ -31,5 +32,10 @@ urlpatterns = [
         name="swagger-ui",
     ),
     path("api/", include("rockart.api.urls")),
-    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True)), name="graphql"),
+    path(
+        "graphql",
+        csrf_exempt(login_required(GraphQLView.as_view(graphiql=True))),
+        name="graphql",
+    ),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]

@@ -1,0 +1,11 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="h5">Profile</h2>
+      <p class="mb-1"><strong>User:</strong> {{ request.user.username }}</p>
+      <p class="mb-3"><strong>Email:</strong> {{ request.user.email }}</p>
+      <a class="btn btn-outline-primary" href="{% url 'logout' %}">Log out</a>
+    </div>
+  </div>
+{% endblock %}

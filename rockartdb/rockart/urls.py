@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path("", views.site_select, name="rockart-home"),
+    path("sites/create/", views.create_site, name="rockart-create"),
     path("sites/<int:site_id>/project/", views.project_info, name="rockart-project"),
     path("sites/<int:site_id>/rock-art/", views.rock_art, name="rockart-rock-art"),
     path("sites/<int:site_id>/panel/", views.panel_view, name="rockart-panel"),
@@ -33,4 +34,5 @@ urlpatterns = [
         name="rockart-photogrammetry",
     ),
     path("sites/<int:site_id>/notes/", views.notes_view, name="rockart-notes"),
+    path("profile/", views.profile, name="rockart-profile"),
 ]

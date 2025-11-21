@@ -1,0 +1,16 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="h5">Login</h2>
+      {% if form.errors %}
+        <div class="alert alert-danger">Invalid credentials, please try again.</div>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

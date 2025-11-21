@@ -144,3 +144,6 @@ SPECTACULAR_SETTINGS = {
 GRAPHENE = {
     "SCHEMA": "rockart.graphql.schema.schema",
 }
+
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/"

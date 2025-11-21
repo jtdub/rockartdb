@@ -1,5 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
 from rest_framework.test import APIClient
 
 from rockart import forms, models
@@ -47,16 +48,30 @@ class SerializerTests(TestCase):
 
 class ViewTests(TestCase):
     def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_user(
+            username="viewer", email="viewer@example.com", password="pass123"
+        )
+        self.staff = User.objects.create_user(
+            username="editor",
+            email="editor@example.com",
+            password="pass123",
+            is_staff=True,
+        )
         self.client = Client()
+        self.client.force_login(self.user)
+        self.staff_client = Client()
+        self.staff_client.force_login(self.staff)
 
     def test_home_lists_sites_and_allows_creation(self):
         url = reverse("rockart-home")
         resp = self.client.get(url)
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, "rockart/site_select.html")
-
-        post_resp = self.client.post(url, {"site_number": "NEW-1"})
-        self.assertEqual(post_resp.status_code, 302)
+        create_resp = self.staff_client.post(
+            reverse("rockart-create"), {"site_number": "NEW-1"}
+        )
+        self.assertEqual(create_resp.status_code, 302)
         self.assertTrue(models.Site.objects.filter(site_number="NEW-1").exists())
 
     def test_section_view_loads(self):
@@ -68,7 +83,20 @@ class ViewTests(TestCase):
 
 class APITests(TestCase):
     def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_user(
+            username="apiuser", email="api@example.com", password="pass123"
+        )
+        self.staff = User.objects.create_user(
+            username="apistaff",
+            email="apistaff@example.com",
+            password="pass123",
+            is_staff=True,
+        )
         self.client = APIClient()
+        self.client.force_authenticate(self.user)
+        self.staff_client = APIClient()
+        self.staff_client.force_authenticate(self.staff)
         self.site = models.Site.objects.create(site_number="API-1")
 
     def test_site_list(self):
@@ -83,7 +111,9 @@ class APITests(TestCase):
             "note_type": models.NoteType.SITE_NARRATIVE,
             "category": models.NoteCategory.FIELD,
         }
-        resp = self.client.post(reverse("rockartnote-list"), payload, format="json")
+        resp = self.staff_client.post(
+            reverse("rockartnote-list"), payload, format="json"
+        )
         self.assertEqual(resp.status_code, 201)
         self.assertEqual(models.RockArtNote.objects.count(), 1)
 
@@ -96,7 +126,12 @@ class URLTests(TestCase):
 
 class GraphQLTests(TestCase):
     def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_user(
+            username="gqluser", email="gql@example.com", password="pass123"
+        )
         self.client = Client()
+        self.client.force_login(self.user)
         self.site = models.Site.objects.create(site_number="GQL-1")
 
     def test_sites_query(self):

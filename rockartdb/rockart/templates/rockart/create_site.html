@@ -1,0 +1,13 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="h5">Create Site</h2>
+      <form method="post" class="pt-2">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save and open</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

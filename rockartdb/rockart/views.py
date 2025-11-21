@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import (
@@ -28,21 +30,41 @@ from .models import (
 )
 
 
+@login_required
 def site_select(request):
     sites = Site.objects.all().order_by("site_number")
+    return render(
+        request,
+        "rockart/site_select.html",
+        {"sites": sites, "site": None},
+    )
+
+
+@login_required
+def create_site(request):
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     form = SiteForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         site = form.save()
         return redirect("rockart-project", site.id)
     return render(
         request,
-        "rockart/site_select.html",
-        {"sites": sites, "form": form, "site_form": form, "site": None},
+        "rockart/create_site.html",
+        {"form": form, "site": None},
     )
 
 
+@login_required
+def profile(request):
+    return render(request, "rockart/profile.html", {"site": None})
+
+
+@login_required
 def project_info(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     form = SiteForm(request.POST or None, instance=site)
     if request.method == "POST" and form.is_valid():
         form.save()
@@ -54,8 +76,11 @@ def project_info(request, site_id):
     )
 
 
+@login_required
 def rock_art(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     info, _ = RockArtInfo.objects.get_or_create(site=site)
     form = RockArtInfoForm(request.POST or None, instance=info)
     if request.method == "POST" and form.is_valid():
@@ -68,8 +93,11 @@ def rock_art(request, site_id):
     )
 
 
+@login_required
 def panel_view(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     form = PanelForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         panel = form.save(commit=False)
@@ -90,8 +118,11 @@ def panel_view(request, site_id):
     )
 
 
+@login_required
 def conditions_view(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     condition, _ = RockArtCondition.objects.get_or_create(site=site)
     form = RockArtConditionForm(request.POST or None, instance=condition)
     if request.method == "POST" and form.is_valid():
@@ -109,8 +140,11 @@ def conditions_view(request, site_id):
     )
 
 
+@login_required
 def attributes_view(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     attrs, _ = RockArtAttributes.objects.get_or_create(site=site)
     form = RockArtAttributesForm(request.POST or None, instance=attrs)
     if request.method == "POST" and form.is_valid():
@@ -128,8 +162,11 @@ def attributes_view(request, site_id):
     )
 
 
+@login_required
 def inventory_anthro_view(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     inv, _ = AnthropomorphInventory.objects.get_or_create(site=site)
     form = AnthropomorphInventoryForm(request.POST or None, instance=inv)
     if request.method == "POST" and form.is_valid():
@@ -147,8 +184,11 @@ def inventory_anthro_view(request, site_id):
     )
 
 
+@login_required
 def inventory_continued_view(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     enigmatic, _ = EnigmaticInventory.objects.get_or_create(site=site)
     zoomorph, _ = ZoomorphInventory.objects.get_or_create(site=site)
     general, _ = GeneralIconographicAttributes.objects.get_or_create(site=site)
@@ -185,8 +225,11 @@ def inventory_continued_view(request, site_id):
     )
 
 
+@login_required
 def photogrammetry_view(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     form = PhotogrammetryLogEntryForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         entry = form.save(commit=False)
@@ -207,8 +250,11 @@ def photogrammetry_view(request, site_id):
     )
 
 
+@login_required
 def notes_view(request, site_id):
     site = get_object_or_404(Site, pk=site_id)
+    if request.method == "POST" and not request.user.is_staff:
+        return HttpResponseForbidden("Admin access required")
     form = RockArtNoteForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         note = form.save(commit=False)
