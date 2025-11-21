@@ -1,0 +1,38 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Rock Art Assemblage Characteristics</legend>
+      <div class="row g-3">
+        <div class="col-md-6">{{ form.repainting.label_tag }}{{ form.repainting }}</div>
+        <div class="col-md-6">{{ form.repainting_comments.label_tag }}{{ form.repainting_comments }}</div>
+        <div class="col-md-6">{{ form.revarnishing.label_tag }}{{ form.revarnishing }}</div>
+        <div class="col-md-6">{{ form.revarnishing_comments.label_tag }}{{ form.revarnishing_comments }}</div>
+        <div class="col-md-6">{{ form.clarity_overall.label_tag }}{{ form.clarity_overall }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Agents of Deterioration</legend>
+      <div class="row g-3">
+        <div class="col-md-6">{{ form.physical_agent.label_tag }}{{ form.physical_agent }}</div>
+        <div class="col-md-6">{{ form.physical_notes.label_tag }}{{ form.physical_notes }}</div>
+        <div class="col-md-6">{{ form.chemical_agent.label_tag }}{{ form.chemical_agent }}</div>
+        <div class="col-md-6">{{ form.chemical_notes.label_tag }}{{ form.chemical_notes }}</div>
+        <div class="col-md-6">{{ form.biochemical_agent.label_tag }}{{ form.biochemical_agent }}</div>
+        <div class="col-md-6">{{ form.biochemical_notes.label_tag }}{{ form.biochemical_notes }}</div>
+        <div class="col-md-6">{{ form.human_impacts.label_tag }}{{ form.human_impacts }}</div>
+        <div class="col-md-6">{{ form.human_impacts_notes.label_tag }}{{ form.human_impacts_notes }}</div>
+        <div class="col-md-6">{{ form.animal_impacts.label_tag }}{{ form.animal_impacts }}</div>
+        <div class="col-md-6">{{ form.animal_impacts_notes.label_tag }}{{ form.animal_impacts_notes }}</div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">{{ form.known_or_perceived_future_impacts.label_tag }}{{ form.known_or_perceived_future_impacts }}</div>
+        <div class="col-md-6">{{ form.future_research_potential.label_tag }}{{ form.future_research_potential }}</div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}

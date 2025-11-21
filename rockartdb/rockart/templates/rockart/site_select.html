@@ -1,0 +1,21 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+      <h2 class="h5">Select a Site</h2>
+      {% if sites %}
+        <ul class="list-group mb-3">
+          {% for s in sites %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span>{{ s.site_number }}</span>
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'rockart-project' s.id %}">Open</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">No sites yet. Create one below.</p>
+      {% endif %}
+      <p class="text-muted mb-0">Use the Create Site dropdown in the header to add a new site.</p>
+    </div>
+  </div>
+{% endblock %}

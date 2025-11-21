@@ -1,0 +1,25 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Project</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.date_recorded.label_tag }}{{ form.date_recorded }}</div>
+        <div class="col-md-9">{{ form.project_name.label_tag }}{{ form.project_name }}</div>
+        <div class="col-12">{{ form.project_description.label_tag }}{{ form.project_description }}</div>
+        <div class="col-12">{{ form.recorders.label_tag }}{{ form.recorders }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Data Housing</legend>
+      <div class="row g-3">
+        <div class="col-md-6">{{ form.temporary_housing.label_tag }}{{ form.temporary_housing }}</div>
+        <div class="col-md-6">{{ form.permanent_housing.label_tag }}{{ form.permanent_housing }}</div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">General Rock Art Character</legend>
+      <div class="row g-3">
+        <div class="col-md-4">{{ form.reason_for_visit.label_tag }}{{ form.reason_for_visit }}</div>
+        <div class="col-md-4">{{ form.previously_recorded.label_tag }}{{ form.previously_recorded }}</div>
+        <div class="col-md-4">{{ form.previous_record_details.label_tag }}{{ form.previous_record_details }}</div>
+        <div class="col-md-4">{{ form.location_type.label_tag }}{{ form.location_type }}</div>
+        <div class="col-md-4">{{ form.radiocarbon_assay.label_tag }}{{ form.radiocarbon_assay }}</div>
+        <div class="col-md-4">{{ form.radiocarbon_citation.label_tag }}{{ form.radiocarbon_citation }}</div>
+        <div class="col-12">{{ form.unidentified_description.label_tag }}{{ form.unidentified_description }}</div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">
+          <label class="form-label">Rock Art Type(s)</label>
+          <div class="form-check d-flex flex-column gap-1">{{ form.rock_art_types }}</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Rock Art Categories</label>
+          <div class="form-check d-flex flex-column gap-1">{{ form.rock_art_categories }}</div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Best Time of Day for Photography</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.best_winter.label_tag }}{{ form.best_winter }}</div>
+        <div class="col-md-3">{{ form.best_spring.label_tag }}{{ form.best_spring }}</div>
+        <div class="col-md-3">{{ form.best_summer.label_tag }}{{ form.best_summer }}</div>
+        <div class="col-md-3">{{ form.best_fall.label_tag }}{{ form.best_fall }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Prevailing Techniques</legend>
+      <div class="row g-3">
+        <div class="col-md-6">{{ form.engraving_technique.label_tag }}{{ form.engraving_technique }}</div>
+        <div class="col-md-6">{{ form.engraving_other.label_tag }}{{ form.engraving_other }}</div>
+        <div class="col-md-6">{{ form.painting_technique.label_tag }}{{ form.painting_technique }}</div>
+        <div class="col-md-6">{{ form.painting_other.label_tag }}{{ form.painting_other }}</div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}

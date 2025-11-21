@@ -1,0 +1,36 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white mb-3">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-4">{{ form.author.label_tag }}{{ form.author }}</div>
+      <div class="col-md-4">{{ form.date.label_tag }}{{ form.date }}</div>
+      <div class="col-md-2">{{ form.note_type.label_tag }}{{ form.note_type }}</div>
+      <div class="col-md-2">{{ form.category.label_tag }}{{ form.category }}</div>
+      <div class="col-12">{{ form.text.label_tag }}{{ form.text }}</div>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+      <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+  </form>
+
+  {% if notes %}
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="h6">Existing Notes</h3>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered align-middle">
+            <thead class="table-light"><tr><th>Date</th><th>Type</th><th>Category</th><th>Author</th><th>Text</th></tr></thead>
+            <tbody>
+              {% for n in notes %}
+                <tr>
+                  <td>{{ n.date }}</td><td>{{ n.get_note_type_display }}</td><td>{{ n.get_category_display }}</td><td>{{ n.author }}</td><td>{{ n.text }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

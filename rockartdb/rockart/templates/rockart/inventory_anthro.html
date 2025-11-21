@@ -1,0 +1,49 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">General</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.frontal.label_tag }}{{ form.frontal }}</div>
+        <div class="col-md-3">{{ form.profile.label_tag }}{{ form.profile }}</div>
+        <div class="col-md-3">{{ form.upside_down.label_tag }}{{ form.upside_down }}</div>
+        <div class="col-md-3">{{ form.horizontal.label_tag }}{{ form.horizontal }}</div>
+        <div class="col-md-3">{{ form.impaled_anthropomorph.label_tag }}{{ form.impaled_anthropomorph }}</div>
+        <div class="col-md-3">{{ form.centralstyling.label_tag }}{{ form.centralstyling }}</div>
+        <div class="col-md-3">{{ form.non_centralstyled.label_tag }}{{ form.non_centralstyled }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Headshapes</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.headshape_round.label_tag }}{{ form.headshape_round }}</div>
+        <div class="col-md-3">{{ form.headshape_square.label_tag }}{{ form.headshape_square }}</div>
+        <div class="col-md-3">{{ form.headshape_u_shape.label_tag }}{{ form.headshape_u_shape }}</div>
+        <div class="col-md-3">{{ form.headshape_other.label_tag }}{{ form.headshape_other }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Body</legend>
+      <div class="row g-3">
+        <div class="col-md-4">{{ form.arms_extended_up.label_tag }}{{ form.arms_extended_up }}</div>
+        <div class="col-md-4">{{ form.arms_extended_down.label_tag }}{{ form.arms_extended_down }}</div>
+        <div class="col-md-4">{{ form.right_handed.label_tag }}{{ form.right_handed }}</div>
+        <div class="col-md-4">{{ form.left_handed.label_tag }}{{ form.left_handed }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Adornments / Paraphernalia</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.headdress.label_tag }}{{ form.headdress }}</div>
+        <div class="col-md-3">{{ form.mask.label_tag }}{{ form.mask }}</div>
+        <div class="col-md-3">{{ form.staff.label_tag }}{{ form.staff }}</div>
+        <div class="col-md-3">{{ form.rabbit_stick.label_tag }}{{ form.rabbit_stick }}</div>
+        <div class="col-md-6">{{ form.other_paraphernalia.label_tag }}{{ form.other_paraphernalia }}</div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}

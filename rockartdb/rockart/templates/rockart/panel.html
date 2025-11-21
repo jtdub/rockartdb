@@ -1,0 +1,64 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white mb-3">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Panel Details</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.panel_number.label_tag }}{{ form.panel_number }}</div>
+        <div class="col-md-3">{{ form.overall_shelter_orientation.label_tag }}{{ form.overall_shelter_orientation }}</div>
+        <div class="col-md-2">{{ form.height_m.label_tag }}{{ form.height_m }}</div>
+        <div class="col-md-2">{{ form.width_m.label_tag }}{{ form.width_m }}</div>
+        <div class="col-md-2">{{ form.area_m2.label_tag }}{{ form.area_m2 }}</div>
+        <div class="col-md-3">{{ form.exposure_degrees.label_tag }}{{ form.exposure_degrees }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Number of images within each panel</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.anthropomorphs_initial.label_tag }}{{ form.anthropomorphs_initial }}</div>
+        <div class="col-md-3">{{ form.anthropomorphs_final.label_tag }}{{ form.anthropomorphs_final }}</div>
+        <div class="col-md-3">{{ form.enigmatics_initial.label_tag }}{{ form.enigmatics_initial }}</div>
+        <div class="col-md-3">{{ form.enigmatics_final.label_tag }}{{ form.enigmatics_final }}</div>
+        <div class="col-md-3">{{ form.zoomorphs_initial.label_tag }}{{ form.zoomorphs_initial }}</div>
+        <div class="col-md-3">{{ form.zoomorphs_final.label_tag }}{{ form.zoomorphs_final }}</div>
+        <div class="col-md-3">{{ form.graffiti_initial.label_tag }}{{ form.graffiti_initial }}</div>
+        <div class="col-md-3">{{ form.graffiti_final.label_tag }}{{ form.graffiti_final }}</div>
+        <div class="col-md-3">{{ form.remnant_initial.label_tag }}{{ form.remnant_initial }}</div>
+        <div class="col-md-3">{{ form.remnant_final.label_tag }}{{ form.remnant_final }}</div>
+        <div class="col-md-3">{{ form.unclassified_initial.label_tag }}{{ form.unclassified_initial }}</div>
+        <div class="col-md-3">{{ form.unclassified_final.label_tag }}{{ form.unclassified_final }}</div>
+        <div class="col-md-3">{{ form.figurative_petros_initial.label_tag }}{{ form.figurative_petros_initial }}</div>
+        <div class="col-md-3">{{ form.figurative_petros_final.label_tag }}{{ form.figurative_petros_final }}</div>
+        <div class="col-md-3">{{ form.grooves_initial.label_tag }}{{ form.grooves_initial }}</div>
+        <div class="col-md-3">{{ form.grooves_final.label_tag }}{{ form.grooves_final }}</div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Add / Update Panel</button>
+    </div>
+  </form>
+
+  {% if panels %}
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="h6">Existing Panels</h3>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered align-middle">
+            <thead class="table-light"><tr><th>#</th><th>Orientation</th><th>Size (m)</th><th>Exposure</th></tr></thead>
+            <tbody>
+              {% for p in panels %}
+                <tr>
+                  <td>{{ p.panel_number }}</td>
+                  <td>{{ p.overall_shelter_orientation }}</td>
+                  <td>{{ p.height_m }} x {{ p.width_m }}</td>
+                  <td>{{ p.exposure_degrees }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

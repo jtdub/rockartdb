@@ -1,0 +1,44 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">General Rock Art Site Attributes</legend>
+      <div class="row g-3">
+        <div class="col-md-6">{{ form.rock_art_category.label_tag }}{{ form.rock_art_category }}</div>
+        <div class="col-md-6">{{ form.style_description.label_tag }}{{ form.style_description }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Post-Painting Modification</legend>
+      <div class="row g-3">
+        <div class="col-md-4">{{ form.post_pecking.label_tag }}{{ form.post_pecking }}</div>
+        <div class="col-md-4">{{ form.post_abrading.label_tag }}{{ form.post_abrading }}</div>
+        <div class="col-md-4">{{ form.post_incising.label_tag }}{{ form.post_incising }}</div>
+        <div class="col-12">{{ form.post_additional_comments.label_tag }}{{ form.post_additional_comments }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">General Attributes</legend>
+      <div class="row g-3">
+        <div class="col-md-4">{{ form.incorporation.label_tag }}{{ form.incorporation }}</div>
+        <div class="col-md-4">{{ form.scaffolding_required.label_tag }}{{ form.scaffolding_required }}</div>
+        <div class="col-md-4">{{ form.potential_for_c14.label_tag }}{{ form.potential_for_c14 }}</div>
+        <div class="col-12">{{ form.general_comments.label_tag }}{{ form.general_comments }}</div>
+      </div>
+      <div class="row g-3 mt-2">
+        <div class="col-md-4">
+          <label class="form-label">Colors Present</label>
+          <div class="form-check">{{ form.has_black }} {{ form.has_black.label_tag }}</div>
+          <div class="form-check">{{ form.has_red }} {{ form.has_red.label_tag }}</div>
+          <div class="form-check">{{ form.has_yellow }} {{ form.has_yellow.label_tag }}</div>
+          <div class="form-check">{{ form.has_white }} {{ form.has_white.label_tag }}</div>
+          <div class="mt-2">{{ form.other_colors.label_tag }}{{ form.other_colors }}</div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}

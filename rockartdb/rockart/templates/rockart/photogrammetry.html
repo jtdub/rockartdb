@@ -1,0 +1,39 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white mb-3">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Photogrammetry Log</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ form.date.label_tag }}{{ form.date }}</div>
+        <div class="col-md-3">{{ form.photo_type.label_tag }}{{ form.photo_type }}</div>
+        <div class="col-md-3">{{ form.photo_range.label_tag }}{{ form.photo_range }}</div>
+        <div class="col-md-3">{{ form.scale_used.label_tag }}{{ form.scale_used }}</div>
+        <div class="col-12">{{ form.description.label_tag }}{{ form.description }}</div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Add Entry</button>
+    </div>
+  </form>
+
+  {% if entries %}
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="h6">Existing Entries</h3>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered align-middle">
+            <thead class="table-light"><tr><th>Date</th><th>Type</th><th>Range</th><th>Scale</th><th>Description</th></tr></thead>
+            <tbody>
+              {% for e in entries %}
+                <tr>
+                  <td>{{ e.date }}</td><td>{{ e.get_photo_type_display }}</td><td>{{ e.photo_range }}</td><td>{{ e.scale_used }}</td><td>{{ e.description }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

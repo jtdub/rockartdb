@@ -1,0 +1,49 @@
+{% extends "rockart/base_form.html" %}
+{% block content %}
+  <form method="post" class="card card-body shadow-sm bg-white">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Enigmatics</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ enigmatic_form.box_with_legs.label_tag }}{{ enigmatic_form.box_with_legs }}</div>
+        <div class="col-md-3">{{ enigmatic_form.arch_with_portal.label_tag }}{{ enigmatic_form.arch_with_portal }}</div>
+        <div class="col-md-3">{{ enigmatic_form.crenelated_box.label_tag }}{{ enigmatic_form.crenelated_box }}</div>
+        <div class="col-md-3">{{ enigmatic_form.comb_shape.label_tag }}{{ enigmatic_form.comb_shape }}</div>
+        <div class="col-md-3">{{ enigmatic_form.grid.label_tag }}{{ enigmatic_form.grid }}</div>
+        <div class="col-md-3">{{ enigmatic_form.zig_zag_line.label_tag }}{{ enigmatic_form.zig_zag_line }}</div>
+        <div class="col-md-3">{{ enigmatic_form.spiral.label_tag }}{{ enigmatic_form.spiral }}</div>
+        <div class="col-md-3">{{ enigmatic_form.serpentine_lines.label_tag }}{{ enigmatic_form.serpentine_lines }}</div>
+        <div class="col-md-3">{{ enigmatic_form.other_enigmatics.label_tag }}{{ enigmatic_form.other_enigmatics }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">Zoomorphs</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ zoomorph_form.feline.label_tag }}{{ zoomorph_form.feline }}</div>
+        <div class="col-md-3">{{ zoomorph_form.avian.label_tag }}{{ zoomorph_form.avian }}</div>
+        <div class="col-md-3">{{ zoomorph_form.snakes.label_tag }}{{ zoomorph_form.snakes }}</div>
+        <div class="col-md-3">{{ zoomorph_form.antlered_deer.label_tag }}{{ zoomorph_form.antlered_deer }}</div>
+        <div class="col-md-3">{{ zoomorph_form.deer_without_antlers.label_tag }}{{ zoomorph_form.deer_without_antlers }}</div>
+        <div class="col-md-3">{{ zoomorph_form.other_zoomorphs.label_tag }}{{ zoomorph_form.other_zoomorphs }}</div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-3">
+      <legend class="fw-semibold">General Attributes</legend>
+      <div class="row g-3">
+        <div class="col-md-3">{{ general_form.antlers_with_dots.label_tag }}{{ general_form.antlers_with_dots }}</div>
+        <div class="col-md-3">{{ general_form.speech_breath.label_tag }}{{ general_form.speech_breath }}</div>
+        <div class="col-md-3">{{ general_form.large_cluster_single_motif.label_tag }}{{ general_form.large_cluster_single_motif }}</div>
+        <div class="col-md-3">{{ general_form.half_bodied_figures.label_tag }}{{ general_form.half_bodied_figures }}</div>
+        <div class="col-md-3">{{ general_form.full_bodied_figures.label_tag }}{{ general_form.full_bodied_figures }}</div>
+        <div class="col-md-3">{{ general_form.dismembered_figures.label_tag }}{{ general_form.dismembered_figures }}</div>
+        <div class="col-md-3">{{ general_form.procession_of_anthropomorphs.label_tag }}{{ general_form.procession_of_anthropomorphs }}</div>
+        <div class="col-md-3">{{ general_form.procession_of_zoomorphs.label_tag }}{{ general_form.procession_of_zoomorphs }}</div>
+        <div class="col-md-3">{{ general_form.peyotism_motif.label_tag }}{{ general_form.peyotism_motif }}</div>
+        <div class="col-md-3">{{ general_form.otherworld_journey_motif.label_tag }}{{ general_form.otherworld_journey_motif }}</div>
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}
